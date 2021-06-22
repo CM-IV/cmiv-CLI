@@ -1,0 +1,29 @@
+@charset "utf-8";
+
+// Import a Google Font
+@import url('https://fonts.googleapis.com/css2?family=Castoro&display=swap');
+
+// Set your brand colors
+$red: hsl(348, 100%, 61%);
+$pink: #FA7C91;
+$black: #000000;
+$beige-light: #D0D1CD;
+$beige-lighter: #EFF0EB;
+
+// Update Bulma's global variables
+$family-sans-serif: "Castoro", sans-serif;
+$text-color: $black;
+$grey-light: $beige-light;
+$primary: $red;
+$link: $black;
+$widescreen-enabled: false;
+$fullhd-enabled: false;
+
+// Update some of Bulma's component variables
+$body-background-color: $beige-lighter;
+$control-border-width: 2px;
+$input-border-color: transparent;
+$input-shadow: none;
+
+// Import from Bulma
+@import "../../node_modules/bulma/bulma.sass";
