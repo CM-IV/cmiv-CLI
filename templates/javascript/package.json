@@ -1,0 +1,31 @@
+{
+    "name": "client",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "start": "npm run clean && snowpack dev",
+      "build": "snowpack build",
+      "clean": "rimraf ./build",
+      "format": "prettier --write \"src/**/*.{js,jsx}\"",
+      "lint": "prettier --check \"src/**/*.{js,jsx}\"",
+      "test": "web-test-runner \"src/**/*.test.jsx\""
+    },
+    "author": "CMIV",
+    "license": "GPLv3",
+    "dependencies": {
+      "preact": "^10.5.13"
+    },
+    "devDependencies": {
+      "@prefresh/snowpack": "^3.0.0",
+      "@snowpack/plugin-dotenv": "^2.1.0",
+      "@snowpack/web-test-runner-plugin": "^0.2.2",
+      "@testing-library/preact": "^2.0.1",
+      "@web/test-runner": "^0.13.3",
+      "chai": "^4.3.4",
+      "prettier": "^2.2.1",
+      "snowpack": "3.5.9",
+      "bulma": "^0.9.2",
+      "rimraf": "^2.7.1"
+    }
+  }
