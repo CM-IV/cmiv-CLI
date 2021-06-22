@@ -12,7 +12,7 @@ function parseArgsIntoOptions(rawArgs) {
             '--install': Boolean,
             '-g': '--git',
             '-y': '--yes',
-            '-i': '--install',
+            '-i': '--install'
 
         },
         {
