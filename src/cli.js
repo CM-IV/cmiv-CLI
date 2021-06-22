@@ -34,7 +34,7 @@ function parseArgsIntoOptions(rawArgs) {
 
 async function promptForMissing(options) {
 
-    const defaultTemplate = 'JavaScript';
+    const defaultTemplate = 'javascript';
     if (options.skipPrompts) {
         return {
             ...options,
@@ -51,7 +51,7 @@ async function promptForMissing(options) {
             type: 'list',
             name: 'template',
             message: 'Please choose which project template to use',
-            choices: ['JavaScript', 'TypeScript'],
+            choices: ['javascript', 'typescript'],
             default: defaultTemplate,
         });
     }

@@ -4,7 +4,7 @@
 
 A command line interface which auto generates a frontend framework.
 
-The framework can either be JavaScript or TypeScript depending on the choice made, snowpack bundler and Preact are also included.
+The framework can either be JavaScript or TypeScript depending on the choice made, Snowpack bundler and Preact are also included.
 
 ### Run the CLI
 ---
@@ -12,6 +12,8 @@ The framework can either be JavaScript or TypeScript depending on the choice mad
 (Once the CLI has been installed)
 
 Run the CLI
-> generate-project
+> generate-project --install
+
+The --install option automatically installs the package.json dependencies for you.
 
 Follow the prompts, it's that simple!
