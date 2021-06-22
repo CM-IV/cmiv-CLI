@@ -5,6 +5,6 @@ services:
     environment:
       - NODE_ENV=development
     ports:
-      - '5000:5000'
+      - 5000:5000
     volumes:
       - .:/app
