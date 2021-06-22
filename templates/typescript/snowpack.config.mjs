@@ -3,10 +3,11 @@
 export default {
     mount: {
       public: { url: '/', static: true },
-      src: { url: '/dist' },
+      src: { url: '/_dist_' },
     },
     plugins: [
       '@prefresh/snowpack',
+      '@snowpack/plugin-sass',
       '@snowpack/plugin-dotenv',
       [
         '@snowpack/plugin-typescript',
@@ -21,8 +22,9 @@ export default {
       // {"match": "routes", "src": ".*", "dest": "/index.html"},
     ],
     optimize: {
-      /* Example: Bundle your final build: */
-      // "bundle": true,
+      bundle: true,
+      minify: true,
+      target: 'es2018'
     },
     packageOptions: {
       /* ... */
@@ -33,4 +35,10 @@ export default {
     buildOptions: {
       /* ... */
     },
+    alias: {
+
+      react: 'preact/compat',
+      'react-dom': 'preact/compat'
+
+    }
   };
