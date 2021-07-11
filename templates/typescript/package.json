@@ -1,5 +1,5 @@
 {
-    "name": "ts-parcel-boilerplate",
+    "name": "ts-snowpack-boilerplate",
     "version": "1.0.0",
     "description": "a boilerplate for TS and Snowpack bundler",
     "main": "index.tsx",
