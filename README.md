@@ -6,10 +6,14 @@ A command line interface which auto generates a frontend framework.
 
 The framework can either be JavaScript or TypeScript depending on the choice made, Snowpack bundler and Preact are also included.
 
-### Run the CLI
+### Install the CLI
 ---
 
-(Once the CLI has been installed)
+Install
+> npm i @cm-iv/generate-project
+
+### Run the CLI
+---
 
 Run the CLI
 > generate-project --install
