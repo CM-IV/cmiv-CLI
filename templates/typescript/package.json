@@ -20,7 +20,9 @@
     "author": "CMIV",
     "license": "GPLv3",
     "dependencies": {
-      "preact": "^10.5.13"
+      "preact": "^10.5.13",
+      "snowpack": "^3.8.3",
+      "axios": "^0.21.1"
     },
     "devDependencies": {
       "bulma": "^0.9.3",
