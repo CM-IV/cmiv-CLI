@@ -9,8 +9,8 @@ The framework can either be JavaScript or TypeScript depending on the choice mad
 ### Install the CLI
 ---
 
-Install
-> npm i @cm-iv/generate-project
+Install globally
+> npm i -g @cm-iv/generate-project
 
 ### Run the CLI
 ---
