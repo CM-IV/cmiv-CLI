@@ -1,0 +1,7 @@
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
+
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300");
+
+body {
+  font-family: "Montserrat", sans-serif;
+}
