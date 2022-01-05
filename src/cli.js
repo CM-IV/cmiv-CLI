@@ -26,7 +26,7 @@ function parseArgsIntoOptions(rawArgs) {
 }
 
 async function promptForMissing(options) {
-  const defaultTemplate = "javascript";
+  const defaultTemplate = "snowpack-preact-js";
   if (options.skipPrompts) {
     return {
       ...options,
@@ -41,7 +41,7 @@ async function promptForMissing(options) {
       type: "list",
       name: "template",
       message: "Please choose which project template to use",
-      choices: ["javascript", "typescript", "wmr"],
+      choices: ["snowpack-preact-js", "snowpack-preact-ts", "wmr-ts", "vite-preact-ts"],
       default: defaultTemplate,
     });
   }
