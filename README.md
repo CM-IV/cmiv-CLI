@@ -10,7 +10,7 @@ The framework can either be JavaScript or TypeScript depending on the choice mad
 
 I have recently added the wmr frontend framework tool for Preact development. So instead of using the Snowpack build tool in the Javascript/Typescript templates, you can opt for wmr which uses the rollup bundler.
 
-**1.3.0 Update**
+**1.3.1 Update**
 
 I have added the Vite frontend toolset into the cli as an option.  It makes use of the preact-ts preset.
 A .gitignore file was also included in the wmr-ts directory.
