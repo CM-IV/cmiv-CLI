@@ -1,0 +1,17 @@
+version: "3.7"
+services:
+  client:
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+    build:
+      dockerfile: Dockerfile
+      context: ./
+    working_dir: /app
+    stdin_open: true
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    volumes:
+      - ./:/app
+      - /app/node_modules

@@ -7,13 +7,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "axios": "^0.24.0",
-    "preact": "^10.5.15",
+    "axios": "^0.26.1",
+    "preact": "^10.7.1",
     "wouter-preact": "^2.8.0-alpha.2"
   },
   "devDependencies": {
-    "@preact/preset-vite": "^2.1.5",
-    "typescript": "^4.4.4",
-    "vite": "^2.7.2"
+    "@preact/preset-vite": "^2.2.0",
+    "typescript": "^4.6.3",
+    "vite": "^2.9.5"
   }
 }
