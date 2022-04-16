@@ -1,6 +1,6 @@
 {
   "name": "@cm-iv/generate-project",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "A CLI to bootstrap new projects",
   "main": "src/index.js",
   "bin": {

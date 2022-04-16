@@ -4,7 +4,7 @@
 
 A command line interface which auto generates a frontend framework.
 
-The framework can either be JavaScript or TypeScript depending on the choice made, Snowpack bundler and Preact are also included.
+The framework can either be JavaScript or TypeScript depending on the choice made, Snowpack bundler/Vitejs and Preact are also included.
 
 **1.2.0 Update**
 
@@ -19,19 +19,18 @@ A .gitignore file was also included in the wmr-ts directory.
 
 The Vitejs and WMR templates should now be Dockerized with updated dependencies.
 
-### Install the CLI
+**1.4.2 Update**
+The Vitejs template was updated to include the Vitest unit testing framework!
+
+### Install the CLI globally
 
 ---
-
-Install globally
 
 > npm i -g @cm-iv/generate-project
 
 ### Run the CLI
 
 ---
-
-Run the CLI
 
 > generate-project --install
 
