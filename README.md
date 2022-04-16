@@ -15,6 +15,10 @@ I have recently added the wmr frontend framework tool for Preact development. So
 I have added the Vite frontend toolset into the cli as an option.  It makes use of the preact-ts preset.
 A .gitignore file was also included in the wmr-ts directory.
 
+**1.4.1 Update**
+
+The Vitejs and WMR templates should now be Dockerized with updated dependencies.
+
 ### Install the CLI
 
 ---
