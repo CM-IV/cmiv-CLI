@@ -22,6 +22,9 @@ The Vitejs and WMR templates should now be Dockerized with updated dependencies.
 **1.4.2 Update**
 The Vitejs template was updated to include the Vitest unit testing framework!
 
+**1.4.3 Update**
+gitignore files should now be included in the project, npm does weird things with its file naming upon publishing packages.
+
 ### Install the CLI globally
 
 ---

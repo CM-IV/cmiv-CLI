@@ -10,10 +10,37 @@ import { projectInstall } from 'pkg-install';
 const access = promisify(fs.access);
 const copy = promisify(ncp);
 
+
+async function gitIgnoreFile(err) {
+  const gitignoreExists = fs.existsSync(path.join(__dirname, '.gitignore'));
+  if (gitignoreExists) {
+    // Append if there's already a `.gitignore` file there
+    const data = fs.readFileSync(path.join(__dirname, 'gitignore'));
+    fs.appendFileSync(path.join(__dirname, '.gitignore'), data);
+    fs.unlinkSync(path.join(__dirname, 'gitignore'));
+  } else {
+    // Rename gitignore after the fact to prevent npm from renaming it to .npmignore
+    // See: https://github.com/npm/npm/issues/1862
+    const stream = fs.createWriteStream(".gitignore");
+    stream.once('open', () => {
+        stream.write('node_modules\n');
+        stream.write('build\n');
+        stream.write('coverage\n');
+        stream.write('.vscode\n');
+        stream.write('.env\n');
+        stream.write('tmp\n');
+        stream.end();
+    })
+
+    if (err) throw err;
+  }
+}
+
 async function copyTemplateFiles(options) {
- return copy(options.templateDirectory, options.targetDirectory, {
-   clobber: false,
- });
+
+  return copy(options.templateDirectory, options.targetDirectory, {
+    clobber: false,
+  });
 }
 
 async function initGit(options) {
@@ -49,6 +76,10 @@ export async function generateProject(options) {
  }
 
  const tasks = new Listr([
+   {
+     title: 'Check for gitignore file',
+     task: () => gitIgnoreFile(),
+   },
    {
      title: 'Copy project files',
      task: () => copyTemplateFiles(options),
