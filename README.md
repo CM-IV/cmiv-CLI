@@ -34,12 +34,17 @@ gitignore files should now be included in the project, npm does weird things wit
 
 Completely re-written in typescript and simplified, templates are still installed but if you want a git repo you'll have to initialize it yourself with `git init`.
 
-### Install the CLI globally
+## Installation
 
 ---
+Install globally with npm
 
 > npm i -g @cm-iv/generate-project
-### Run the CLI
+
+or use (p)npx
+
+> pnpx @cm-iv/generate-project generate-project
+## Run the CLI
 
 ---
 
