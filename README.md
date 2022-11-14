@@ -2,7 +2,7 @@
 
 A command line interface which auto generates a frontend framework.
 
-Pick from three options (so far):
+Pick from four options (so far):
 
 - NextJS 13 BETA
 - Astro
