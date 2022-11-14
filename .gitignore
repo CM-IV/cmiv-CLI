@@ -1,0 +1,12 @@
+node_modules
+build
+dist
+coverage
+.vscode
+.env
+tmp
+next-env.d.ts
+.vercel
+.env*.local
+.next
+out

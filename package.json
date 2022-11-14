@@ -1,0 +1,51 @@
+{
+  "name": "@cm-iv/generate-project",
+  "version": "2.0.0",
+  "description": "A CLI to bootstrap new projects",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx index.ts",
+    "build": "tsup index.ts --format esm --target esnext && rm -rf bin/templates && cp -r ./templates bin"
+  },
+  "type": "module",
+  "bin": {
+    "@cm-iv/generate-project": "bin/index.js",
+    "generate-project": "bin/index.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "tsup": {
+    "entry": [
+      "index.ts"
+    ],
+    "splitting": false,
+    "sourcemap": true,
+    "outDir": "bin",
+    "clean": true
+  },
+  "keywords": [
+    "cli",
+    "interface",
+    "generate-project"
+  ],
+  "author": "CM-IV",
+  "license": "GPL-3.0-or-later",
+  "devDependencies": {
+    "@types/ejs": "^3.1.1",
+    "@types/fs-extra": "^9.0.13",
+    "@types/inquirer": "^9.0.3",
+    "@types/node": "^18.11.9",
+    "@types/shelljs": "^0.8.11",
+    "tsup": "^6.5.0",
+    "tsx": "^3.12.1"
+  },
+  "dependencies": {
+    "chalk": "^5.1.2",
+    "ejs": "^3.1.8",
+    "fs-extra": "^10.1.0",
+    "inquirer": "^9.1.4",
+    "ora": "^6.1.2",
+    "shelljs": "^0.8.5"
+  }
+}
