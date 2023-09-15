@@ -2,6 +2,9 @@
 
 A command line interface which auto generates a frontend framework.
 
+![image](https://github.com/CM-IV/cmiv-CLI/assets/44551614/f639763e-71a3-48cf-baf7-32e8d8902bcf)
+
+
 Pick from four options (so far):
 
 - NextJS 13 App Router
