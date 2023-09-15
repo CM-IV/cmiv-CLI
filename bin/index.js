@@ -2,41 +2,28 @@
 
 // index.ts
 import fs from "fs-extra";
-import { fileURLToPath } from "url";
-import path from "path";
-import inquirer from "inquirer";
-import chalk from "chalk";
-
-// utils/template.ts
-import * as ejs from "ejs";
-function render2(content, data) {
-  return ejs.render(content, data);
-}
-
-// index.ts
+import path from "pathe";
 import shell from "shelljs";
-import ora from "ora";
-var __filename = fileURLToPath(import.meta.url);
+import consola from "consola";
+import { normalizeURL, withoutProtocol } from "ufo";
+var __filename = withoutProtocol(normalizeURL(import.meta.url));
 var __dirname = path.dirname(__filename);
 var CHOICES = fs.readdirSync(path.join(__dirname, "templates"));
-var QUESTIONS = [
-  {
-    name: "template",
-    type: "list",
-    message: "What template would you like to use?",
-    choices: CHOICES
-  },
-  {
-    name: "name",
-    type: "input",
-    message: "Please input a new project name:"
-  }
-];
 var CURR_DIR = process.cwd();
-var prompt = inquirer.createPromptModule();
-prompt(QUESTIONS).then((answers) => {
-  const projectChoice = answers["template"];
-  const projectName = answers["name"];
+consola.box({
+  title: "CMIV-CLI",
+  message: `Thanks for using this tool!`,
+  style: {
+    padding: 1,
+    borderColor: "magenta",
+    borderStyle: "double-single-rounded"
+  }
+});
+consola.prompt("What template would you like to use?", {
+  type: "select",
+  options: CHOICES
+}).then(async (projectChoice) => {
+  const projectName = await consola.prompt("Please give the project directory name", { type: "text" });
   const templatePath = path.join(__dirname, "templates", projectChoice);
   const targetPath = path.join(CURR_DIR, projectName);
   const options = {
@@ -48,17 +35,14 @@ prompt(QUESTIONS).then((answers) => {
   if (!createProject(targetPath)) {
     return;
   }
-  const spinner = ora("Loading templates...").start();
-  spinner.spinner = "arrow3";
-  setTimeout(() => {
-    createDirectoryContents(templatePath, projectName);
-    postProcess(options);
-    spinner.succeed();
-  }, 7e3);
+  consola.start("Loading templates...");
+  createDirectoryContents(templatePath, projectName);
+  postProcess(options);
+  consola.success("Template loaded!");
 });
 function createProject(projectPath) {
   if (fs.existsSync(projectPath)) {
-    console.log(chalk.red(`Folder ${projectPath} exists. Delete or use another name.`));
+    consola.error(`Folder ${projectPath} exists. Delete or use another name.`);
     return false;
   }
   fs.mkdirSync(projectPath);
@@ -74,7 +58,6 @@ function createDirectoryContents(templatePath, projectName) {
       return;
     if (stats.isFile()) {
       let contents = fs.readFileSync(origFilePath, "utf8");
-      contents = render2(contents, { projectName });
       const writePath = path.join(CURR_DIR, projectName, file);
       fs.writeFileSync(writePath, contents, "utf8");
     } else if (stats.isDirectory()) {

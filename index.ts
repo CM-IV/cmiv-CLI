@@ -1,29 +1,15 @@
 #!/usr/bin/env node
 
 import fs from 'fs-extra';
-import { fileURLToPath } from 'url';
-import path from 'path';
-import inquirer from 'inquirer';
-import chalk from 'chalk';
-import { render } from './utils/template';
+import path from 'pathe';
 import shell from 'shelljs';
-import ora from 'ora';
+import consola from 'consola';
+import { normalizeURL, withoutProtocol } from 'ufo';
 
-const __filename = fileURLToPath(import.meta.url);
+const __filename = withoutProtocol(normalizeURL(import.meta.url));
+
 const __dirname = path.dirname(__filename);
 const CHOICES = fs.readdirSync(path.join(__dirname, 'templates'));
-const QUESTIONS = [
-{
-    name: 'template',
-    type: 'list',
-    message: 'What template would you like to use?',
-    choices: CHOICES
-},
-{
-    name: 'name',
-    type: 'input',
-    message: 'Please input a new project name:'
-}];
 
 export interface CliOptions {
     projectName: string
@@ -34,20 +20,28 @@ export interface CliOptions {
 
 const CURR_DIR = process.cwd();
 
-const prompt = inquirer.createPromptModule();
+consola.box({
+    title: "CMIV-CLI",
+    message: `Thanks for using this tool!`,
+    style: {
+      padding: 1,
+      borderColor: "magenta",
+      borderStyle: "double-single-rounded",
+    },
+});
 
-prompt(QUESTIONS).then(answers => {
-    const projectChoice = answers['template'];
-    const projectName = answers['name'];
-    //@ts-ignore
+consola.prompt("What template would you like to use?", {
+    type: "select",
+    options: CHOICES
+}).then(async (projectChoice) => {
+    const projectName = await consola.prompt("Please give the project directory name", { type: "text" });
+
     const templatePath = path.join(__dirname, 'templates', projectChoice);
-    //@ts-ignore
+
     const targetPath = path.join(CURR_DIR, projectName);
 
     const options: CliOptions = {
-        //@ts-ignore
         projectName,
-        //@ts-ignore
         templateName: projectChoice,
         templatePath,
         targetPath
@@ -57,21 +51,17 @@ prompt(QUESTIONS).then(answers => {
         return;
     }
 
-    const spinner = ora('Loading templates...').start();
-    spinner.spinner = 'arrow3';
+    consola.start("Loading templates...")
 
-    setTimeout(() => {
-        createDirectoryContents(templatePath, projectName);
-        postProcess(options);
+    createDirectoryContents(templatePath, projectName);
+    postProcess(options);
 
-        spinner.succeed();
-    }, 7000)
-
-});
+    consola.success("Template loaded!");
+})
 
 function createProject(projectPath: string) {
     if (fs.existsSync(projectPath)) {
-        console.log(chalk.red(`Folder ${projectPath} exists. Delete or use another name.`));
+        consola.error(`Folder ${projectPath} exists. Delete or use another name.`);
         return false;
     }
     fs.mkdirSync(projectPath);
@@ -99,7 +89,8 @@ function createDirectoryContents(templatePath: string, projectName: string) {
         if (stats.isFile()) {
             // read file content and transform it using template engine
             let contents = fs.readFileSync(origFilePath, 'utf8');
-            contents = render(contents, { projectName });
+            // contents = render(contents, { projectName });
+
             // write file to destination folder
             const writePath = path.join(CURR_DIR, projectName, file);
             fs.writeFileSync(writePath, contents, 'utf8');

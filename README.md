@@ -4,10 +4,10 @@ A command line interface which auto generates a frontend framework.
 
 Pick from four options (so far):
 
-- NextJS 13 BETA
-- Astro
-- Preact Vite TypeScript
-- SolidJS Vite TypeScript
+- NextJS 13 App Router
+- Astro v3.0
+- Preact Vite Typescript
+- SolidJS Vite Typescript
 
 **1.2.0 Update**
 
@@ -33,6 +33,10 @@ gitignore files should now be included in the project, npm does weird things wit
 **2.0.0 Update - Breaking Changes!!!**
 
 Completely re-written in typescript and simplified, templates are still installed but if you want a git repo you'll have to initialize it yourself with `git init`.
+
+**2.1.0 Update**
+
+Using packages from [UnJS](https://unjs.io/packages) now.  The templates have been updated and the terminal UI was overhauled.
 
 ## Installation
 
