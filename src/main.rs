@@ -3,38 +3,75 @@ use owo_colors::OwoColorize;
 use temp_dir::TempDir;
 
 use std::path::Path;
+use std::sync::{Arc, atomic::{AtomicBool, Ordering}};
+use std::process::exit;
 
 static TEMPLATE_DIR: Dir<'_> = include_dir!("templates/");
 
 fn main() {
-    ctrlc::set_handler(move || {}).expect("setting Ctrl-C handler");
+    let should_terminate = Arc::new(AtomicBool::new(false));
 
-    cliclack::clear_screen().unwrap();
+    {
+        let terminate_signal = Arc::clone(&should_terminate);
+        ctrlc::set_handler(move || {
+            terminate_signal.store(true, Ordering::SeqCst);
+        }).expect("Error setting Ctrl-C handler");
+    }
 
-    cliclack::intro("CM-IV CLI".on_cyan().black()).unwrap();
+    if let Err(e) = cliclack::clear_screen() {
+        eprintln!("Error clearing screen: {}", e);
+        exit(1);
+    }
 
-    let path = cliclack::input("Where should we create your project?")
-        .placeholder("./sparkling-solid")
-        .validate(|input: &String| {
-            if input.is_empty() {
-                Err("Please enter a path.")
-            } else if !input.starts_with("./") {
-                Err("Please enter a relative path")
+    if let Err(e) = cliclack::intro("CM-IV CLI".on_cyan().black()) {
+        eprintln!("Error showing intro: {}", e);
+        exit(1);
+    }
+
+    let path = match cliclack::input("Where should we create your project?")
+    .placeholder("./sparkling-solid")
+    .validate(|input: &String| {
+        if input.is_empty() {
+            Err("Please enter a path.")
+        } else if !input.starts_with("./") {
+            Err("Please enter a relative path")
+        } else {
+            Ok(())
+        }
+    })
+    .interact()
+    {
+        Ok(path) => path,
+        Err(e) => {
+            if should_terminate.load(Ordering::SeqCst) {
+                println!("\nGracefully exiting...");
+                exit(0);
             } else {
-                Ok(())
+                eprintln!("Error with input: {}", e);
+                exit(1);
             }
-        })
-        .interact()
-        .unwrap();
+        }
+    };
 
-    let kind = cliclack::select(format!("Pick a template to install in '{path}'"))
-        .initial_value("astro")
-        .item("astro", "Astro", "")
-        .item("nextjs", "NextJS", "")
-        .item("preact-vite-ts", "Preact Vite TS", "")
-        .item("solid-vite-ts", "Solid Vite TS", "")
-        .interact()
-        .unwrap();
+    let kind = match cliclack::select(format!("Pick a template to install in '{path}'"))
+    .initial_value("astro")
+    .item("astro", "Astro", "")
+    .item("nextjs", "NextJS", "")
+    .item("preact-vite-ts", "Preact Vite TS", "")
+    .item("solid-vite-ts", "Solid Vite TS", "")
+    .interact()
+    {
+        Ok(kind) => kind,
+        Err(e) => {
+            if should_terminate.load(Ordering::SeqCst) {
+                println!("Gracefully exiting...");
+                exit(0);
+            } else {
+                eprintln!("Error with selection: {}", e);
+                exit(1);
+            }
+        }
+    };
 
     let dirs = TEMPLATE_DIR.entries();
 
