@@ -2,6 +2,7 @@
 name = "cmiv-cli"
 version = "0.1.0"
 edition = "2021"
+repository = "https://github.com/CM-IV/cmiv-CLI"
 
 [dependencies]
 cliclack = "0.2.5"
@@ -27,6 +28,7 @@ lto = "thin"
 
 # Config for 'cargo dist'
 [workspace.metadata.dist]
+ci = ["github"]
 # The preferred cargo-dist version to use in CI (Cargo.toml SemVer syntax)
 cargo-dist-version = "0.15.0"
 # The installers to generate for each app
