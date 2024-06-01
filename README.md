@@ -2,7 +2,7 @@
 
 A command line interface which auto generates a frontend framework
 
-**UPDATE: (now written in Rust, final binary is < 1MB in size)**
+**UPDATE: (now written in Rust, final binary size reduced and runtime speed increased)**
 
 Pick from four options (so far):
 
