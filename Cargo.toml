@@ -1,6 +1,6 @@
 [package]
 name = "cmiv-cli"
-version = "0.1.3"
+version = "0.1.4"
 edition = "2021"
 repository = "https://github.com/CM-IV/cmiv-CLI"
 
@@ -33,4 +33,8 @@ cargo-dist-version = "0.15.0"
 # The installers to generate for each app
 installers = []
 # Target platforms to build apps for (Rust target-triple syntax)
-targets = ["aarch64-apple-darwin", "x86_64-unknown-linux-gnu", "x86_64-pc-windows-msvc"]
+targets = [
+    "aarch64-apple-darwin",
+    "x86_64-unknown-linux-gnu",
+    "x86_64-pc-windows-msvc",
+]
