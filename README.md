@@ -1,6 +1,6 @@
 # cmiv-cli
 
-A command line interface which auto generates a frontend framework
+A command line interface which auto generates a frontend (or full-stack) framework
 
 **UPDATE: (now written in Rust, final binary size reduced and runtime speed increased)**
 
