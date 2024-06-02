@@ -7,9 +7,12 @@ A command line interface which auto generates a frontend framework
 Pick from four options (so far):
 
 - NextJS App Router
-- Astro
+- BlitzJS App Router
+- RedwoodJS (Typescript)
+- AstroJS
 - Preact Vite Typescript
 - SolidJS Vite Typescript
+- Svelte Vite Typescript
 
 ## Installation
 
