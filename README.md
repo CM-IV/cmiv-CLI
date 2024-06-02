@@ -10,6 +10,7 @@ Pick from these options (so far):
 - BlitzJS App Router
 - RedwoodJS (Typescript)
 - AstroJS
+- AdonisJS
 - Preact Vite Typescript
 - SolidJS Vite Typescript
 - Svelte Vite Typescript

@@ -66,6 +66,7 @@ fn main() {
         .item("nextjs", "NextJS", "")
         .item("redwood-ts", "RedwoodJS", "")
         .item("blitz-ts", "BlitzJS", "")
+        .item("adonis-ts-web", "AdonisJS", "")
         .item("preact-vite-ts", "Preact Vite TS", "")
         .item("solid-vite-ts", "Solid Vite TS", "")
         .item("svelte-vite-ts", "Svelte Vite TS", "")
