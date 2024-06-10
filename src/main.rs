@@ -25,15 +25,9 @@ fn main() {
         .expect("Error setting Ctrl-C handler");
     }
 
-    if let Err(e) = cliclack::clear_screen() {
-        eprintln!("Error clearing screen: {}", e);
-        exit(1);
-    }
+    cliclack::clear_screen().unwrap();
 
-    if let Err(e) = cliclack::intro("CM-IV CLI".on_cyan().black()) {
-        eprintln!("Error showing intro: {}", e);
-        exit(1);
-    }
+    cliclack::intro("CM-IV CLI".on_cyan().black()).unwrap();
 
     let path = match cliclack::input("Where should we create your project?")
         .placeholder("./sparkling-solid")
@@ -49,12 +43,12 @@ fn main() {
         .interact()
     {
         Ok(path) => path,
-        Err(e) => {
+        Err(_) => {
             if should_terminate.load(Ordering::SeqCst) {
-                println!("\nGracefully exiting...");
+                cliclack::log::remark("\nGracefully exiting...").unwrap();
                 exit(0);
             } else {
-                eprintln!("Error with input: {}", e);
+                cliclack::log::error("\nError with input, exiting...").unwrap();
                 exit(1);
             }
         }
@@ -73,12 +67,12 @@ fn main() {
         .interact()
     {
         Ok(kind) => kind,
-        Err(e) => {
+        Err(_) => {
             if should_terminate.load(Ordering::SeqCst) {
-                println!("Gracefully exiting...");
+                cliclack::log::remark("\nGracefully exiting...").unwrap();
                 exit(0);
             } else {
-                eprintln!("Error with selection: {}", e);
+                cliclack::log::error("\nError with selection, exiting...").unwrap();
                 exit(1);
             }
         }
@@ -98,14 +92,6 @@ fn copy_template(install_path: String, kind: &str, dirs: &[DirEntry]) {
 
             let extracted_template_path = d.path().join(kind);
 
-            if !extracted_template_path.exists() {
-                eprintln!(
-                    "Template path does not exist: {}",
-                    extracted_template_path.display()
-                );
-                continue;
-            }
-
             let target_path = std::path::Path::new(&format!(
                 "{}/{}",
                 std::env::current_dir().unwrap().display(),
@@ -119,23 +105,16 @@ fn copy_template(install_path: String, kind: &str, dirs: &[DirEntry]) {
             }
 
             let mut entries: Vec<PathBuf> = vec![];
+
             if let Ok(dir_entries) = std::fs::read_dir(&extracted_template_path) {
                 for entry in dir_entries {
                     if let Ok(entry) = entry {
                         entries.push(entry.path());
                     }
                 }
-            } else {
-                eprintln!(
-                    "Failed to read directory: {}",
-                    extracted_template_path.display()
-                );
-                continue;
             }
 
-            let options = CopyOptions::new();
-
-            match fs_extra::copy_items(&entries, &target_path, &options) {
+            match fs_extra::copy_items(&entries, &target_path, &CopyOptions::new()) {
                 Ok(_) => {
                     cliclack::outro("All finished, thanks for using CM-IV CLI!".green()).unwrap();
                 }
