@@ -7,7 +7,6 @@ A command line interface which auto generates a frontend (or full-stack) framewo
 Pick from these options (so far):
 
 - NextJS App Router
-- BlitzJS App Router
 - RedwoodJS (Typescript)
 - AstroJS
 - AdonisJS
